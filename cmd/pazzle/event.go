@@ -10,13 +10,13 @@ import (
 	//"github.com/shizuokago/mobile/debug"
 	//"golang.org/x/mobile/exp/app/debug"
 
+	"golang.org/x/mobile/event/size"
+	"golang.org/x/mobile/event/touch"
 	"golang.org/x/mobile/exp/gl/glutil"
 	"golang.org/x/mobile/exp/sprite"
-	"golang.org/x/mobile/gl"
-	"golang.org/x/mobile/event/size"
 	"golang.org/x/mobile/exp/sprite/clock"
-	"golang.org/x/mobile/event/touch"
 	"golang.org/x/mobile/exp/sprite/glsprite"
+	"golang.org/x/mobile/gl"
 )
 
 var (
@@ -58,4 +58,3 @@ func onPaint(glctx gl.Context, sz size.Event) {
 func onTouch(e touch.Event) bool {
 	return game.Touch(e)
 }
-

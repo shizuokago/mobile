@@ -1,9 +1,9 @@
 package debug
 
 import (
-	"golang.org/x/mobile/exp/gl/glutil"
 	"fmt"
 	"golang.org/x/mobile/event/size"
+	"golang.org/x/mobile/exp/gl/glutil"
 )
 
 type Point struct {
@@ -12,13 +12,13 @@ type Point struct {
 
 func NewPoint(images *glutil.Images) *Point {
 	return &Point{
-		str : NewString(images),
+		str: NewString(images),
 	}
 }
 
-func (p *Point) Draw(x,y float32,sz size.Event) {
-	buf := fmt.Sprintf("X:%d,Y:%d",int(x),int(y))
-	p.str.Draw(sz,buf)
+func (p *Point) Draw(x, y float32, sz size.Event) {
+	buf := fmt.Sprintf("X:%d,Y:%d", int(x), int(y))
+	p.str.Draw(sz, buf)
 }
 
 func (p *Point) Release() {
@@ -26,4 +26,3 @@ func (p *Point) Release() {
 		p.str.Release()
 	}
 }
-

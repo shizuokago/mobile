@@ -1,14 +1,14 @@
 package main
 
 import (
-	"time"
-	"math/rand"
 	"golang.org/x/mobile/app"
-	"golang.org/x/mobile/gl"
-	"golang.org/x/mobile/event/size"
 	"golang.org/x/mobile/event/lifecycle"
 	"golang.org/x/mobile/event/paint"
+	"golang.org/x/mobile/event/size"
 	"golang.org/x/mobile/event/touch"
+	"golang.org/x/mobile/gl"
+	"math/rand"
+	"time"
 )
 
 func init() {

@@ -1,35 +1,35 @@
 package debug
 
 import (
+	"golang.org/x/mobile/event/size"
 	"golang.org/x/mobile/exp/gl/glutil"
+	"golang.org/x/mobile/geom"
+	"image"
 	"image/color"
 	"image/draw"
-	"image"
-	"golang.org/x/mobile/geom"
-	"golang.org/x/mobile/event/size"
 )
 
 type String struct {
-	images   *glutil.Images
-	m        *glutil.Image
-	datum    string
+	images *glutil.Images
+	m      *glutil.Image
+	datum  string
 }
 
 const (
 	fontWidth  = 5
 	fontHeight = 7
-	length = 15
+	length     = 15
 )
 
 func NewString(images *glutil.Images) *String {
 	return &String{
-		images:   images,
+		images: images,
 	}
 }
 
-func (s *String) Draw(sz size.Event,buf string) {
+func (s *String) Draw(sz size.Event, buf string) {
 
-	const imgW, imgH = length * (fontWidth+1) + 1, fontHeight + 2
+	const imgW, imgH = length*(fontWidth+1) + 1, fontHeight + 2
 	if s.m != nil {
 		s.m.Release()
 	}
@@ -55,11 +55,11 @@ func (s *String) Draw(sz size.Event,buf string) {
 
 	s.m.Upload()
 
-	topLeft := geom.Point{ X:0, Y:sz.HeightPt - imgH}
-	topRight := geom.Point{X:imgW, Y:sz.HeightPt - imgH}
-	bottomLeft := geom.Point{ X:0, Y:sz.HeightPt}
+	topLeft := geom.Point{X: 0, Y: sz.HeightPt - imgH}
+	topRight := geom.Point{X: imgW, Y: sz.HeightPt - imgH}
+	bottomLeft := geom.Point{X: 0, Y: sz.HeightPt}
 
-	s.m.Draw( sz, topLeft, topRight, bottomLeft, s.m.RGBA.Bounds() )
+	s.m.Draw(sz, topLeft, topRight, bottomLeft, s.m.RGBA.Bounds())
 }
 
 func (s *String) Release() {
@@ -69,6 +69,7 @@ func (s *String) Release() {
 		s.images = nil
 	}
 }
+
 // I implemented it with reference
 // https://github.com/golang/mobile/blob/master/exp/app/debug/fps.go
 
