@@ -29,6 +29,7 @@ const (
 	statePick
 	stateMove
 	stateComplate
+	stateStop
 )
 
 func randomPiece() int {
@@ -105,6 +106,7 @@ func (g *Game) reset() {
 }
 
 func (g *Game) Release() {
+	g.state = stateStop
 }
 
 func (g *Game) Scene(eng sprite.Engine) *sprite.Node {
