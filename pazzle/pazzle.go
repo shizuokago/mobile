@@ -52,8 +52,8 @@ type Game struct {
 	board Board
 
 	pick   bool
-	pickX  float32
-	pickY  float32
+	PickX  float32
+	PickY  float32
 	pieceX int
 	pieceY int
 
@@ -142,14 +142,14 @@ func (g *Game) Scene(eng sprite.Engine) *sprite.Node {
 					if x == g.pieceX && y == g.pieceY {
 
 						//座標はオフセットや倍率がかかっているので算出
-						startX = g.pickX
-						startY = g.pickY
+						startX = g.PickX
+						startY = g.PickY
 
-						//startX = (g.pickX - g.boardX) / g.zoom
-						//startY = (g.pickY - g.boardY) / g.zoom
+						startX = (g.PickX - g.boardX) / g.zoom
+						startY = (g.PickY - g.boardY) / g.zoom
 						//中央分引き込む
-						//startX -= g.imageX / 2
-						//startY -= g.imageY / 2
+						startX -= g.imageX / 2
+						startY -= g.imageY / 2
 					}
 				}
 
@@ -201,15 +201,14 @@ func loadTextures(eng sprite.Engine) []sprite.SubTex {
 }
 
 func (g *Game) Touch(e touch.Event) bool {
+
 	touchType := e.Type
+	nx := e.X
+	ny := e.Y
+
 	if touchType == touch.TypeBegin {
 		//座標からピックしているピースを特定
-		//return g.pickPiece(e.X, e.Y)
-		g.state = statePick
-		g.pieceX = 0
-		g.pieceY = 0
-
-		return true
+		return g.pickPiece(nx, ny)
 	} else if touchType == touch.TypeEnd {
 		//動かしていた場合
 		if g.state == stateMove {
@@ -222,7 +221,7 @@ func (g *Game) Touch(e touch.Event) bool {
 		return true
 	} else if g.state == statePick || g.state == stateMove {
 		//移動処理
-		return g.move(e.X, e.Y)
+		return g.move(nx, ny)
 	}
 	return false
 }
@@ -240,16 +239,16 @@ func (g *Game) pickPiece(x, y float32) bool {
 
 	g.pieceX = bx
 	g.pieceY = by
-	g.pickX = x
-	g.pickY = y
+	g.PickX = x
+	g.PickY = y
 
 	return true
 }
 
 func (g *Game) move(x, y float32) bool {
 
-	g.pickX = x
-	g.pickY = y
+	g.PickX = x
+	g.PickY = y
 
 	//盤面の領域内にいるかを判定
 	newPieceX, newPieceY, err := g.getPiece(x, y)

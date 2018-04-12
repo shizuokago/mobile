@@ -1,4 +1,4 @@
-package pazzle
+package main
 
 import (
 	"time"
